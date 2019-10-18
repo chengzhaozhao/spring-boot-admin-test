@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-boot-logging
+
+
+
+api:
+  boot:
+    # ApiBoot Logging \u65E5\u5FD7\u7EC4\u4EF6\u914D\u7F6E
+    logging:
+      show-console-log: true
+      format-console-log-json: true
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
