@@ -39,12 +39,65 @@
             <version>1.2.62</version>
         </dependency>
 
+        <!--ApiBoot Logging-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-starter-logging</artifactId>
+        </dependency>
+
+        <!--ApiBoot Logging Admin-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-starter-logging-admin</artifactId>
+        </dependency>
 
 
+        <!--ApiBoot Mybatis Enhance-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-starter-mybatis-enhance</artifactId>
+        </dependency>
+        <!--MySQL驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!--Hikari数据源-->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
 
+        <!--Spring Boot Security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--ApiBoot Security Oauth-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-starter-security-oauth-jwt</artifactId>
+        </dependency>
+
+        <!--Erueka Client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!--ApiBoot Swagger-->
+        <dependency>
+            <groupId>org.minbox.framework</groupId>
+            <artifactId>api-boot-starter-swagger</artifactId>
+        </dependency>
     </dependencies>
-
-
 
 
     <dependencyManagement>

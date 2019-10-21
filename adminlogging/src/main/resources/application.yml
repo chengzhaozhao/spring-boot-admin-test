@@ -4,15 +4,126 @@ server:
 spring:
   application:
     name: api-boot-logging
-
-
+  # \u6570\u636E\u6E90\u914D\u7F6E
+  datasource:
+    url: jdbc:mysql://39.98.200.95:3306/boot-admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    username: root
+    password: Mysql2019
+  security:
+    user:
+      # \u7528\u6237\u540D
+      name: user
+      # \u5BC6\u7801
+      password: 123456
+  redis:
+    password: 123456
+    host: 127.0.0.1
 
 api:
   boot:
     # ApiBoot Logging \u65E5\u5FD7\u7EC4\u4EF6\u914D\u7F6E
     logging:
-      show-console-log: true
+      admin:
+        #\u663E\u793A\u4E0A\u62A5
+        show-console-report-log: true
+        #\u683C\u5F0F\u5316\u663E\u793A
+        format-console-log-json: true
+        # \u65E5\u5FD7\u4E0A\u62A5\u5230\u6307\u5B9A\u7684\u670D\u52A1\u5668\u5730\u5740
+#        server-address: 127.0.0.1:9090
+        # \u652F\u6301 spring-security \u4E0A\u62A5
+        server-address: user:123456@127.0.0.1:9090
+      # \u7F8E\u5316\u63A7\u5236\u53F0\u65E5\u5FD7\u6253\u5370
       format-console-log-json: true
+      report-initial-delay-second: 5
+      # \u63A7\u5236\u53F0\u6253\u5370\u65E5\u5FD7
+      show-console-log: true
+      # \u4FEE\u6539\u65E5\u5FD7\u524D\u7F00 \u53EF\u4EE5\u914D\u7F6E\u591A\u4E2A
+      logging-path-prefix:
+      # \u6392\u9664\u8BF7\u6C42\u65E5\u5FD7\u7684\u5217\u8868
+      ignore-paths:
+      # \u4FEE\u6539\u6BCF\u95F4\u969410\u79D2\u6267\u884C\u4E00\u6B21\u4E0A\u62A5\u65E5\u5FD7
+      report-interval-second: 10
+      # \u6BCF\u6B21\u65E5\u5FD7\u4E0A\u62A5\u7684\u6761\u6570
+      report-number-of-request-log: 2
+      #\u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3Admin\u7684\u5B89\u5168\u914D\u7F6E
+      discovery:
+        # \u4E0A\u4F20\u5230\u6307\u5B9A\u7684\u670D\u52A1\u5217\u8868 ld
+        service-id: sample-logging-admin
+        username:
+        password:
+    # \u63A5\u53E3\u670D\u52A1\u6CA1\u6709\u6DFB\u52A0\u6570\u636E\u5E93\u4F9D\u8D56 \u53EF\u4EE5\u901A\u8FC7\u4EE5\u4E0B\u65B9\u5F0F\u914D\u7F6E \u5185\u5B58\u7528\u6237\u7684 \u8D26\u53F7\u5BC6\u7801\u548C\u89D2\u8272\u7684\u4F7F\u7528
+    security:
+      users:
+        - username:
+          password:
+          roles:
+
+        - username:
+          password:
+          roles: user,good
+      # \u5F00\u542Fjdbc security
+      away: jdbc
+      # \u7981\u7528\u6389 api \u9ED8\u8BA4\u8BFB\u53D6\u7528\u6237\u7684\u65B9\u5F0F \u542F\u7528\u8BFB\u53D6\u7528\u6237\u81EA\u5B9A\u4E49\u8868\u4E2D\u7684\u4FE1\u606F
+      enable-default-store-delegate: false
+      # \u6392\u9664\u8DEF\u5F84\u7684\u5217\u8868
+      ignoring-urls:
+        - /login
+        - /register
+        - /code/send
+      # \u5F00\u542Fhttp basic
+      disable-http-basic: false
+      # \u8D44\u6E90\u4FDD\u62A4\u8DEF\u5F84\u7684\u524D\u7F00
+      auth-prefix: /user/**,/order/**
+    oauth:
+      # \u914D\u7F6E\u5BA2\u6237\u7AEF\u7F16\u53F7\u4FE1\u606F\uFF08\u83B7\u53D6access_token\u65F6\u643A\u5E26\u7684Basic Auth\u7684\u7528\u6237\u540D\uFF09\uFF0C\u8BE5\u53C2\u6570\u9ED8\u8BA4\u503C\u4E3AApiBoot
+      client-id: ApiBoot
+      # \u914D\u7F6E\u5BA2\u6237\u7AEF\u79D8\u94A5\uFF08\u83B7\u53D6access_token\u65F6\u643A\u5E26\u7684Basic Auth\u7684\u5BC6\u7801\uFF09\uFF0C\u8BE5\u53C2\u6570\u9ED8\u8BA4\u503C\u4E3AApiBootSecret
+      client-secret: ApiBootSecret
+      # \u662F\u6388\u6743\u8BBF\u95EE\u7684\u8D44\u6E90\u7F16\u53F7\uFF0C\u9ED8\u8BA4\u503C\u4E3Aap
+      resource-id: api
+      #GrantType\u6388\u6743\u65B9\u5F0F\u7684\u914D\u7F6E\uFF0C\u5BF9\u5E94\u7740\u5BA2\u6237\u7AEF\u6240\u62E5\u6709\u7684\u6743\u9650\uFF0C\u5982\uFF1Apassword\u5BF9\u5E94\u7740\u4F7F\u7528\u7528\u6237\u540D\u3001\u5BC6\u7801\u65B9\u5F0F\u83B7\u53D6access_token\uFF0Crefresh_token\u5219\u5BF9\u5E94access_token\u8FC7\u671F\u540E\u4F7F\u7528\u5237\u65B0\u7684\u65B9\u5F0F\u83B7\u53D6\u65B0\u7684access_token
+      grant-types: password,refresh_token
+      #Scope\u662F\u914D\u7F6E\u5BA2\u6237\u7AEF\u6240\u6388\u6743\u7684\u4F5C\u7528\u57DF\uFF0C\u53EF\u4EE5\u901A\u8FC7\u8BE5\u914D\u7F6E\u8FDB\u884C\u6743\u9650\u68C0\u9A8C
+      scopes: api,admin
+      away: redis
+      #ApiBoot OAuth\u652F\u6301\u4F7F\u7528JDBC\u65B9\u5F0F\u5C06\u751F\u6210\u7684AccessToken\u5B58\u653E\u5230\u6570\u636E\u5E93\uFF0C\u4EE5\u53CA\u5728\u6570\u636E\u5E93\u5185\u8FDB\u884C\u914D\u7F6E\u5BA2\u6237\u7AEF\u7684\u76F8\u5173\u4FE1\u606F\uFF0C\u6BD4\u5982\uFF1Aclient_id\u3001client_secret\u3001grant_type\u3001scopes\u7B49\u3002 \u6211\u4EEC\u5982\u679C\u9700\u8981\u4F7F\u7528ApiBoot OAuth\u7684JDBC\u65B9\u5F0F\u6765\u5B9E\u73B0\uFF0C\u9700\u8981\u9075\u5FAAOAuth2\u7684\u5EFA\u8868SQL\u5728\u9700\u8981\u7684\u6570\u636E\u5E93\u5185\u6267\u884C\u521B\u5EFA\u8868\u7ED3\u6784\uFF0CMySQL\u6570\u636E\u5E93\u5BF9\u5E94\u7684\u8BED\u53E5\u8BBF\u95EEMySQL OAuth2 SQL\u83B7\u53D6\uFF0C\u5F00\u542FJDBC\u65B9\u5F0F\u4FEE\u6539application.yml\u914D\u7F6E\u5982\u4E0B
+#      away: jdbc
+      jwt:
+        enable: true
+        #JWT\u5185\u90E8\u4F7F\u7528RSA\u65B9\u5F0F\u8FDB\u884C\u52A0\u5BC6\uFF0C\u52A0\u5BC6\u65F6\u9700\u8981\u4F7F\u7528\u79D8\u94A5Key\uFF0CApiBoot Security Oauth\u5185\u90E8\u9ED8\u8BA4\u4F7F\u7528ApiBoot\u4F5C\u4E3A\u79D8\u94A5Key
+        sign-key:
+      clients:
+        - client-id: admin
+          client-secret: admin_secret
+        - client-id: platform
+          client-secret: platform_secret
+
+
+
+
+
+
+
+
+
+logging:
+  # \u4FEE\u6539\u65E5\u5FD7\u7684\u7EA7\u522B
+  level:
+    org.minbox.framework.api.boot.plugin.logging: debug
+
+
+# Eureka Config \u652F\u6301\u670D\u52A1\u6CE8\u518C consul nacos
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
+#    fetch-registry: false
+#    register-with-eureka: false
+#  instance:
+#    # IP\u9996\u9009\u65B9\u5F0F\u6CE8\u518C\u670D\u52A1
+#    prefer-ip-address: true
 
 
 

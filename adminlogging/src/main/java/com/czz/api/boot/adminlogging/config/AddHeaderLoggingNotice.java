@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 /**
  * @author chengzhzh@datangmobile.com
  * @create 2019-10-18 11:08
+ * 向 header 添加自定义信息
  */
 @Component
 public class AddHeaderLoggingNotice implements LoggingNotice {
